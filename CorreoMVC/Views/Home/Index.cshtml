@@ -1,0 +1,1584 @@
+﻿<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <img src="~/Images/send-mail1.png" style="width: 100px; height: 100px;" />
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <div class="input-group-append">
+                </div>
+            </div>
+        </form>
+    </nav>
+    <div id="work-in-progress">
+        <div class="work-spinner"></div>
+    </div>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">ENVIO CORREO MASIVO</div>
+                        <a class="nav-link" href="~/Home/Index">
+                            Inicio
+                        </a>
+
+                        <div id="opcionesAlSubirExcel" style="display:none">
+                            <div class="sb-sidenav-menu-heading">OPCIONES</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                Plantillas
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a href="#" class="nav-link" data-toggle="modal" data-target="#barra1">Crear</a>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Desarrollado por:</div>
+                    Esteban Pazmiño
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Envío Correo Masivo</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">Autenticación</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="nav-link collapsed small text-white stretched-link" href="#" data-toggle="collapse" data-target="#divAutenticacionColapsado" aria-expanded="false" aria-controls="collapseLayouts">
+                                        Haga clic para autenticarse
+
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="collapse" id="divAutenticacionColapsado" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav>
+                                    <div class="card mb-4">
+                                        <div class="card-header">Validación de Cuenta</div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                                            <input class="form-control py-4" id="emailPropierty" type="email" placeholder="Ingrese su email" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="inputPassword">Contraseña</label>
+                                                            <input class="form-control py-4" id="passwordPropierty" type="password" placeholder="Ingrese su contraseña" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="smtpServer">Servidor SMTP</label>
+                                                            <input class="form-control py-4" id="smtpServer" type="email" placeholder="Ingrese el servidor SMTP" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="port">Puerto</label>
+                                                            <input class="form-control py-4" id="port" type="text" placeholder="Ingrese el puerto" />
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                            <input type="button" class="btn btn-primary" onclick="validarCuenta();" id="btnValidarCuenta" value="Validar" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div id="divEnvioCorreos" class="col-xl-6" style="display:none">
+                            <div class="card bg-success text-white mb-4">
+                                <div class="card-body">Envíar Correos</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="nav-link collapsed small text-white stretched-link" href="#" data-toggle="collapse" data-target="#divEnvioColapsado" aria-expanded="false" aria-controls="collapseLayouts">
+                                        Haga clic para envíar correos
+
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="collapse" id="divEnvioColapsado" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav>
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Detalles
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="fromName">Empresa</label>
+                                                    <input class="form-control py-4" id="fromName" type="email" placeholder="Ingrese el nombre de su empresa" />
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="emailSubject">Asunto</label>
+                                                    <input class="form-control py-4" id="emailSubject" type="text" placeholder="Ingrese el asunto del correo" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Destinatarios
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="xlsxFile">Seleccionar Excel</label>
+                                                            <input type="file" class="form-control" id="xlsxFile" placeholder="Correos:" accept=".xlsx">
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                            <input type="button" class="btn btn-success" onclick="subirExcel();" id="btnUploadExcel" value="Subir Destinatarios" />
+                                                            <input type="button" class="btn btn-danger" onclick="cancelarExcel();" id="btnCancelExcel" value="Cancelar" disabled />
+                                                            <img id="Aatrox" title="Aatrox" alt="6300" style="cursor:pointer" src="~/Content/Images/close.png" />
+                                                            @*<input type="button" class="btn btn-success" data-toggle="modal" data-target="#barra3" value="Como cargar destinatarios" />*@
+                                                            <input type="text" id="indicadorExcel" style="display:none" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="">Seleccione la columna de destinatarios</label>
+                                                            <div id="colsExcel" class="select-dropdown">
+                                                                @{ var cols1 = ViewData["colsExcel"] as string[];
+
+                                                                    if (cols1 != null)
+                                                                    {
+                                                                        <select id="dropdownCols1" name="dropdownCols" class="form-control" onChange="cambioColDestinatios()">
+                                                                            @for (int i = 0; i < cols1.Length; i++)
+                                                                            {
+                                                                                <option value=@cols1[i]>@cols1[i]</option>
+                                                                            }
+
+                                                                        </select>
+                                                                    }
+                                                                }
+                                                                <div class="select-dropdown"></div>
+                                                            </div>
+                                                            <br />
+                                                            <div style="text-align:right">
+                                                                <img id="Aatrox3" title="Aatrox" alt="6300" style="cursor:pointer" src="~/Content/Images/advertencia.png" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    Plantilla
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputEmailAddress">Seleccionar</label>
+                                                        <div id="combo" class="select-dropdown">
+                                                            @{ var archivos = ViewData["archivos"] as string[];
+
+                                                                if (archivos != null)
+                                                                {
+                                                                    <select id="emailHtmlTemplate" name="emailHtmlTemplate" class="form-control">
+                                                                        @for (int i = 0; i < @archivos.Length; i++)
+                                                                        {
+                                                                            <option value=@archivos[i]>@archivos[i]</option>
+                                                                        }
+
+                                                                    </select>
+                                                                }
+                                                            }
+                                                            <div class="select-dropdown"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                        <input type="button" class="btn btn-success" onclick="subirPlantilla();" id="btnUploadPlantilla" value="Subir Plantilla" />
+                                                        <input type="button" class="btn btn-danger" onclick="cancelarPlantilla();" id="btnCancelPlantilla" value="Cancelar" disabled />
+                                                        <img id="Aatrox1" title="Aatrox" alt="6300" style="cursor:pointer" src="~/Content/Images/close.png" />
+                                                        <input type="text" id="indicadorPlantilla" style="display:none" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    Añadir Adjunto
+                                                </div>
+                                                <div class="card-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="inputEmailAddress">Seleccionar</label>
+                                                            <input type="file" class="form-control" id="adjunto" placeholder="Adjunto:">
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                            <input type="button" class="btn btn-success" onclick="subirAdjunto();" id="btnUploadAdjunto" value="Subir Adjunto" />
+                                                            <input type="button" class="btn btn-danger" onclick="cancelarAdjunto();" id="btnCancelAdjunto" value="Cancelar" disabled />
+                                                            <img id="Aatrox2" title="Aatrox" alt="6300" style="cursor:pointer" src="~/Content/Images/close.png" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button href="#" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#barraProgreso">ENVIAR</button>
+
+                                    </div>
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Aplicación web para el envío de correo masivo 2020</div>
+                        <div>
+                            <a href="#">Politica de Privacidad</a>
+                            &middot;
+                            <a href="#">Terminos y Condiciones</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    @* POPUP CREACION PLANTILLA *@
+    <div class="container">
+        <div class="modal fade" id="barra1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Crear Plantilla</h3>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="card mb-4">
+                            <div id="formulario" class="card-body">
+                                <form>
+                                    <div id="divAgregarTag" class="form-group">
+
+                                        <div id="divCreacionTag" class="form-group">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    Visualización Destinatarios
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input type="button" class="btn btn-primary" onclick="mostrarDestinatarios();" id="btnMostrarDestinatarios" value="Mostrar" />
+                                                    <input type="button" class="btn btn-danger" onclick="ocultarDestinatarios();" id="btnOcultarDestinatarios" value="Ocultar" style="display:none" />
+                                                </div>
+
+                                                <div id="divComprobacionDestinatarios" class="card-body" style="display:none">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" id="exceltable" width="100%" cellspacing="0"></table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    Creación Tag
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <label class="small mb-1" for="">Nombre</label>
+                                                            <input class="form-control py-4" id="txtNombreTag" type="text" placeholder="Ingrese el nombre del tag" />
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <br />
+                                                            <input type="button" class="btn btn-success" onclick="crearTag();" id="btnCreaTag" value="Crear" />
+
+                                                            <input id="btnPaso1" type="button" class="btn btn-primary" style="display:none" onclick="siguientePaso2();" value="Siguiente" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="divAsignacionTag" class="form-group" style="display:none">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                Asignación Tag a Columna Excel
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="">Tag</label>
+                                                        <div id="comboTags" class="select-dropdown">
+                                                            <div class="select-dropdown">
+                                                                <select id="dropdownTags" name="dropdownTags" class="form-control">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="">Columna</label>
+                                                            <div id="colsExcel" class="select-dropdown">
+                                                                @{ var cols = ViewData["colsExcel"] as string[];
+
+                                                                    if (cols != null)
+                                                                    {
+                                                                        <select id="dropdownCols" name="dropdownCols" class="form-control">
+                                                                            @for (int i = 0; i < cols.Length; i++)
+                                                                            {
+                                                                                <option value=@cols[i]>@cols[i]</option>
+                                                                            }
+
+                                                                        </select>
+                                                                    }
+                                                                }
+                                                                <div class="select-dropdown"></div>
+                                                            </div>
+                                                            <br />
+                                                            <div style="text-align:right">
+                                                                <input type="button" class="btn btn-success" onclick="asignarTagCol();" id="btnAsignaTag" value="Asignar" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div id="divConfirmacionTagsCol" style="display:none">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                Revisión de Asignaciones
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-7" style="text-align:center">
+                                                        <label class="small mb-1" for="">Tag-Columnas</label>
+                                                        <div id="comboTags" class="select-dropdown">
+                                                            <div class="select-dropdown">
+                                                                <select id="dropdownColTags" name="dropdownColTags" class="form-control"></select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <br />
+                                                        <input id="btnConfirmarAsignaciones" type="button" class="btn btn-info" onclick="confirmarAsignaciones();" value="Confirmar" />
+                                                        <input id="btnPaso2" type="button" class="btn btn-primary" style="display:none" onclick="siguientePaso3();" value="Siguiente" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div id="divNombreTituloPlantilla" style="display:none">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                Nombre y Titulo de la Plantilla
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="txtNombrePlantilla">Nombre</label>
+                                                        <input class="form-control py-4" id="txtNombrePlantilla" type="text" placeholder="Ingrese el nombre" />
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="txtTituloPlantilla">Titulo</label>
+                                                        <input class="form-control py-4" id="txtTituloPlantilla" type="text" placeholder="Ingrese el título" />
+                                                        <br />
+                                                        <div style="text-align:right">
+                                                            <input id="btnPaso3" type="button" class="btn btn-primary" style="display:none" onclick="siguientePaso4();" value="Siguiente" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="divContenidoPlantilla" style="display:none">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                Contenido
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <label class="small mb-1" for="">Tags Disponibles</label>
+                                                            <div id="comboTags" class="select-dropdown">
+                                                                <div class="select-dropdown">
+                                                                    <select id="dropdownTagsContenido" name="dropdownTagsContenido" class="form-control">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <br />
+                                                            <input type="button" class="btn btn-success" onclick="colocarTag()" value="Añadir" />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <label class="small mb-1" for="txtContenido">Contenido</label>
+                                                    <textarea class="form-control" id="txtContenido" type="text" placeholder="Ingrese el contenido" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="text-align:right">
+                                            <input id="btnPaso4" type="button" class="btn btn-primary" style="display:none" onclick="siguientePaso5();" value="Siguiente" />
+                                        </div>
+
+                                    </div>
+
+                                    <div id="divOpcionalesFirmaPlantilla" class="form-group" style="display:none">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                Opcionales
+                                            </div>
+                                            <div class="card-body">
+                                                <label class="small mb-1" for="txtLinkSitio">Link Sitio Web</label>
+                                                <input class="form-control py-4" id="txtLinkSitio" type="text" placeholder="Ej:www.seteinfo.com" />
+                                                <br />
+                                                <label class="small mb-1" for="imagenFile">Seleccionar Imagen</label>
+                                                <input type="file" class="form-control" id="imagenFile" placeholder="Imagen:" accept=".png,.jpg,.jpeg,.gif">
+                                                <br />
+                                                <input type="button" class="btn btn-success" onclick="subirImagen();" id="btnUploadImagen" value="Subir Imagen" />
+                                                <input type="button" class="btn btn-danger" onclick="cancelarImagen();" id="btnCancelImagen" value="Cancelar" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                Firma del Emisor
+                                            </div>
+                                            <div class="card-body">
+                                                <input class="form-control py-4" id="txtFirma" type="text" placeholder="Escriba la firma del Emisor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divBtnCrearPlantilla" style="text-align:right;display:none">
+                                        <input type="button" value="Crear" class="btn btn-warning" onclick="CrearPlantilla();" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-danger" data-dismiss="modal">Cerrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* POPUP COMO SUBIR DESTINATARIOS *@
+    <div class="container">
+        <div class="modal fade" id="barra3">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Como subir desinatarios</h3>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                Como cargar destinatarios desde un archivo de excel
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    Para cargar los destinatarios mediante un archivo de Excel, este deberá contener las columnas
+                                    <b>nombre</b> e <b>email</b>, de esta forma la aplicación web reconocerá todas las direcciones de correo
+                                    contenidas en el archivo.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-danger" data-dismiss="modal">Cerrar</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* POPUP BARRA *@
+    <div class="container">
+        <div class="modal fade" id="barraProgreso" style="padding-right:0px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Confirmación de envío</h3>
+                    </div>
+                    <div class="modal-body">
+                        <label>¿Está seguro de realizar el envío de correo masivo a los destinarios con la plantilla seleccionada?</label>
+                        <div id="divBarraProgreso" class="progress" style="margin:50px;">
+
+                            <div id="bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-
+                                 valuemax="100" style="width: 0%;">
+
+                                <span class="sr-only">0% Complete</span>
+                            </div>
+                        </div>
+                        <button id="btnConfirmarEnvio" onclick="validaCampos();" type="button" class="btn btn-primary btn-success">Confirmar</button>
+                        <button id="btnPlanificar" onclick="planificacionEmail();" type="button" class="btn btn-primary">Planificar</button>
+                        <a id="btnCerrarEnvio" href="#" class="btn btn-danger" data-dismiss="modal">Cerrar</a>
+
+
+                        <div id="divPlanificacion" style="display:none" class="container">
+                            <br />
+                            <div class="form-group">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        Planificación
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <label class="small mb-1" for="date">Fecha y hora</label>
+                                            <div class="form-group">
+                                                <input type="text" name="date" value="" id="dateTime">
+                                                <input type="button" class="btn btn-primary" onclick="envioPlanificacion();" id="btnEnvioPlan" value="Enviar" />
+                                                <input type="button" class="btn btn-danger" onclick="cancelarPlanificacion();" id="btnCancelEnvioPlan" value="Cancelar" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@* Scripts Expotacion Excel a Tabla *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.14.1/dist/xlsx.full.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+
+@* Scripts Datetimepicker *@
+<!--Requirement jQuery-->
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>*@
+<!--Load Script and Stylesheet -->
+<script type="text/javascript" src="~/Scripts/dtpicker/jquery.simple-dtpicker.js"></script>
+<link type="text/css" href="~/Scripts/dtpicker/jquery.simple-dtpicker.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/scripts.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/styles.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="~/Content/alertifyjs/alertify.min.css" />
+<link rel="stylesheet" href="~/Content/alertifyjs/alertify.rtl.min.css" />
+
+
+<!-- Alertify -->
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+<script src="~/Scripts/alertify.min.js"></script>
+
+<script type="text/javascript">
+
+    alertify.defaults = {
+        // dialogs defaults
+        autoReset: true,
+        basic: false,
+        closable: false,
+        closableByDimmer: true,
+        invokeOnCloseOff: false,
+        frameless: false,
+        defaultFocusOff: false,
+        maintainFocus: true, // <== global default not per instance, applies to all dialogs
+        maximizable: true,
+        modal: true,
+        movable: true,
+        moveBounded: false,
+        overflow: true,
+        padding: true,
+        pinnable: true,
+        pinned: true,
+        preventBodyShift: false, // <== global default not per instance, applies to all dialogs
+        resizable: true,
+        startMaximized: false,
+        transition: 'pulse',
+        transitionOff: false,
+        tabbable: 'button:not(:disabled):not(.ajs-reset),[href]:not(:disabled):not(.ajs-reset),input:not(:disabled):not(.ajs-reset),select:not(:disabled):not(.ajs-reset),textarea:not(:disabled):not(.ajs-reset),[tabindex]:not([tabindex^="-"]):not(:disabled):not(.ajs-reset)',  // <== global default not per instance, applies to all dialogs
+
+        // notifier defaults
+        notifier: {
+            // auto-dismiss wait time (in seconds)
+            delay: 5,
+            // default position
+            position: 'bottom-right',
+            // adds a close button to notifier messages
+            closeButton: false,
+            // provides the ability to rename notifier classes
+            classes: {
+                base: 'alertify-notifier',
+                prefix: 'ajs-',
+                message: 'ajs-message',
+                top: 'ajs-top',
+                right: 'ajs-right',
+                bottom: 'ajs-bottom',
+                left: 'ajs-left',
+                center: 'ajs-center',
+                visible: 'ajs-visible',
+                hidden: 'ajs-hidden'
+            }
+        },
+
+        // language resources
+        glossary: {
+            // dialogs default title
+            title: 'Envío de Correo Masivo',
+            // ok button text
+            ok: 'OK'
+        },
+
+        // theme settings
+        theme: {
+            // class name attached to prompt dialog input textbox.
+            input: 'ajs-input',
+            // class name attached to ok button
+            ok: 'ajs-ok'
+
+        },
+        // global hooks
+        hooks: {
+            // invoked before initializing any dialog
+            preinit: function (instance) { },
+            // invoked after initializing any dialog
+            postinit: function (instance) { },
+        },
+    };
+
+    var Aatrox = document.getElementById("Aatrox");
+    //var Aatroxclicks = 0;
+    var Aatrox1 = document.getElementById("Aatrox1");
+    //var Aatroxclicks1 = 0;
+    var Aatrox2 = document.getElementById("Aatrox2");
+    //var Aatroxclicks2 = 0;
+    var Aatrox3 = document.getElementById("Aatrox3");
+    //var Aatroxclicks2 = 0;
+
+    function RecargarPagina() {
+        window.location.href = "/Home/Index";
+        //window.location.href = '/CorreoMVC/Home/Index';
+    }
+
+    function EnviarBarra() {
+        //Barra();
+        barraProgreso();
+        setTimeout(enviarCorreos(), 200);
+    }
+
+    function Barra() {
+        //$.getJSON("/CorreoMVC/Home/Barra",
+        $.getJSON("/Home/Barra",
+            {},
+            function (data) {
+                console.log(data);
+                var progreso = 0;
+                var idIterval = setInterval(function () {
+                    // Aumento en 10 el progeso 100/total=x
+                    progreso += data;
+                    $('#bar').css('width', progreso + '%');
+
+                    //Si llegó a 100 elimino el interval
+                    if (progreso == 100) {
+                        clearInterval(idIterval);
+
+                    }
+
+                }, 1000);
+            });
+    }
+
+    function barraProgreso() {
+
+            $.ajax({
+                url: '@Url.Action("Barra", "Home")',
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var progreso = 0;
+                    var idIterval = setInterval(function () {
+                        // Aumento en 10 el progeso 100/total=x
+                        progreso += data;
+                        $('#bar').css('width', progreso + '%');
+
+                        //Si llegó a 100 elimino el interval
+                        if (progreso == 100) {
+                            clearInterval(idIterval);
+
+                        }
+
+                    }, 3000);
+
+                }
+            });
+    }
+
+    $(window).bind("load", function () {
+        $('#work-in-progress').fadeOut(900);
+    });
+
+    function validarCuenta() {
+
+        var emailPropietario = $('#emailPropierty').val();
+        var passwordPropietario = $('#passwordPropierty').val();
+        var smtpServidor = $('#smtpServer').val();
+        var puerto = $('#port').val();
+
+        var btnValidar = document.getElementById('btnValidarCuenta');
+
+         $.ajax({
+             url: '@Url.Action("Validar", "Home")',
+             type: 'POST',
+             data: JSON.stringify(
+             {
+                     emailPropierty: emailPropietario,
+                     passwordPropierty: passwordPropietario,
+                     smtpServer: smtpServidor,
+                     port:puerto
+
+             }),
+             contentType: 'application/json; charset=utf-8',
+             dataType: "json",
+             success: function (result) {
+                 if (result.success) {
+                     alertify.success(result.message);
+                     btnValidar.disabled = true;
+                     $('#divEnvioCorreos').show();
+                 } else {
+                     alertify.error(result.message);
+                 }
+             }
+         });
+
+    }
+
+    function validaCampos() {
+        indicadorE = $("#indicadorExcel").val();
+        indicadorP = $("#indicadorPlantilla").val();
+
+        nombreEmisor = $('#fromName').val();
+        asuntoEmail = $('#emailSubject').val();
+
+        /* Para obtener el valor del tag */
+        var colExcel = document.getElementById("dropdownCols1").value;
+
+
+        if (indicadorE == "" || indicadorP == "" || nombreEmisor == "" || asuntoEmail == "" ) {
+            alertify.warning('Asegurese de colocar el emisor, asunto, subir los destinatarios y la plantilla seleccionada');
+        }
+        else {
+            EnviarBarra();
+        }
+
+    }
+
+    function enviarCorreos() {
+
+        var nombreEmisor = $('#fromName').val();
+        var emailPropietario = $('#emailPropierty').val();
+        var passwordPropietario = $('#passwordPropierty').val();
+        var smtpServidor = $('#smtpServer').val();
+        var puerto = $('#port').val();
+
+        var excelCorreos = $('#xlsxFile').val();
+        var asuntoEmail = $('#emailSubject').val();
+        var body = $('#bodyEmail').val();
+
+        /* Para obtener el valor del tag */
+        var colExcel = document.getElementById("dropdownCols1").value;
+
+
+        $.ajax({
+            url: '@Url.Action("Enviar", "Home")',
+
+            type: 'POST',
+            data: JSON.stringify(
+            {
+                   fromName: nombreEmisor,
+                   emailPropierty: emailPropietario,
+                   passwordPropierty: passwordPropietario,
+                   smtpServer: smtpServidor,
+                   port: puerto,
+                   xlsxFile: excelCorreos,
+                   subject: asuntoEmail,
+                   mensaje: body,
+                   colEx: colExcel
+            }),
+
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            success: function (result) {
+                if (result.success) {
+                    console.log(result.data);
+
+                    if (result.data == undefined) {
+                        result.data = "";
+                    }
+
+                    alertify.alert(result.message + " " + result.data,
+                        function () {
+                            window.location.href = "/Home/Index";
+                            //window.location.href = "/CorreoMVC/Home/Index";
+                        });
+
+
+                } else {
+
+                    alertify.alert(result.message,
+                        function () {
+                            window.location.href = "/Home/Index";
+                            //window.location.href = "/CorreoMVC/Home/Index";
+                        });
+
+                }
+
+            }
+        });
+    }
+
+    function envioPlanificacion() {
+
+        var nombreEmisor = $('#fromName').val();
+        var emailPropietario = $('#emailPropierty').val();
+        var passwordPropietario = $('#passwordPropierty').val();
+        var smtpServidor = $('#smtpServer').val();
+        var puerto = $('#port').val();
+
+        var excelCorreos = $('#xlsxFile').val();
+        var asuntoEmail = $('#emailSubject').val();
+        var body = $('#bodyEmail').val();
+        var fechaHora = $('#dateTime').val();
+
+        /* Para obtener el valor del tag */
+        var colExcel = document.getElementById("dropdownCols1").value;
+
+
+        alertify.alert("El envío de los correos ha sido planificado para el: " + fechaHora,
+            function () {
+                RecargarPagina();
+            });
+
+         $.ajax({
+             url: '@Url.Action("EnviarPlan", "Home")',
+
+             type: 'POST',
+             data: JSON.stringify(
+             {
+                    fromName: nombreEmisor,
+                    emailPropierty: emailPropietario,
+                    passwordPropierty: passwordPropietario,
+                    smtpServer: smtpServidor,
+                    port: puerto,
+                    xlsxFile: excelCorreos,
+                    subject: asuntoEmail,
+                    mensaje: body,
+                     fechaHora: fechaHora,
+                     colEx: colExcel
+
+             }),
+             contentType: 'application/json; charset=utf-8',
+             dataType: "json",
+             success: function (result) {
+
+                 if (result.success) {
+                     alertify.success(result.message);
+                     //window.location.href = "/Home/Index";
+                     //window.location.href = "/CorreoMVC/Home/Index";
+                 } else {
+                     alertify.warning(result.message);
+                     //window.location.href = "/Home/Index";
+                     //window.location.href = "/CorreoMVC/Home/Index";
+                     return
+                 }
+
+             }
+         });
+    }
+
+    function planificacionEmail()
+    {
+        $('#btnConfirmarEnvio').hide();
+        $('#divBarraProgreso').hide();
+        $('#divPlanificacion').show();
+        $('#btnPlanificar').hide();
+        $('#btnCerrarEnvio').hide();
+    }
+    function cancelarPlanificacion()
+    {
+        $('#btnPlanificar').show();
+        $('#divBarraProgreso').show();
+        $('#divPlanificacion').hide();
+        $('#btnConfirmarEnvio').show();
+        $('#btnCerrarEnvio').show();
+
+        RecargarPagina();
+    }
+
+    function ExportToTable() {
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
+        /*Checks whether the file is a valid excel file*/
+        if (regex.test($("#xlsxFile").val().toLowerCase())) {
+            var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/
+            if ($("#xlsxFile").val().toLowerCase().indexOf(".xlsx") > 0) {
+                xlsxflag = true;
+            }
+            /*Checks whether the browser supports HTML5*/
+            if (typeof (FileReader) != "undefined") {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    var data = e.target.result;
+
+                    /*Converts the excel data in to object*/
+                    if (xlsxflag) {
+                        var workbook = XLSX.read(data, { type: 'binary' });
+                    }
+                    else {
+                        var workbook = XLS.read(data, { type: 'binary' });
+                    }
+                    /*Gets all the sheetnames of excel in to a variable*/
+                    var sheet_name_list = workbook.SheetNames;
+
+                    var cnt = 0; /*This is used for restricting the script to consider only first sheet of excel*/
+                    sheet_name_list.forEach(function (y) { /*Iterate through all sheets*/
+                        /*Convert the cell value to Json*/
+                        if (xlsxflag) {
+                            var exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                        }
+                        else {
+                            var exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]);
+                        }
+                        if (exceljson.length > 0 && cnt == 0) {
+                            $('#exceltable').empty();
+                            BindTable(exceljson, '#exceltable');
+                            cnt++;
+                        }
+                    });
+                    $('#exceltable').show();
+                }
+                if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/
+                    reader.readAsArrayBuffer($("#xlsxFile")[0].files[0]);
+                }
+                else {
+                    reader.readAsBinaryString($("#xlsxFile")[0].files[0]);
+                }
+            }
+            else {
+                alertify.warning("Sorry! Your browser does not support HTML5!");
+            }
+        }
+        else {
+            alertify.warning("Seleccione un archivo de excel");
+        }
+    }
+    function BindTable(jsondata, tableid) {/*Function used to convert the JSON array to Html Table*/
+        var columns = BindTableHeader(jsondata, tableid); /*Gets all the column headings of Excel*/
+        for (var i = 0; i < jsondata.length; i++) {
+            var row$ = $('<tr/>');
+            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                var cellValue = jsondata[i][columns[colIndex]];
+                if (cellValue == null)
+                    cellValue = "";
+                row$.append($('<td/>').html(cellValue));
+            }
+            $(tableid).append(row$);
+        }
+    }
+    function BindTableHeader(jsondata, tableid) {/*Function used to get all column names from JSON and bind the html table header*/
+        var columnSet = [];
+        var headerTr$ = $('<tr/>');
+        for (var i = 0; i < jsondata.length; i++) {
+            var rowHash = jsondata[i];
+            for (var key in rowHash) {
+                if (rowHash.hasOwnProperty(key)) {
+                    if ($.inArray(key, columnSet) == -1) {/*Adding each unique column names to a variable array*/
+                        columnSet.push(key);
+                        headerTr$.append($('<th/>').html(key));
+                    }
+                }
+            }
+        }
+        $(tableid).append(headerTr$);
+        return columnSet;
+    }
+
+    function subirExcel() {
+
+        var btnUpExcel = document.getElementById('btnUploadExcel');
+        var btnFileUpExcel = document.getElementById('xlsxFile');
+        var btnCancelarExcel = document.getElementById('btnCancelExcel');
+
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#xlsxFile").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+            $.ajax({
+                url: '@Url.Action("UploadFiles", "Home")',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+
+                    if (result.success) {
+                        //alert(result.message);
+                        $('#indicadorExcel').val("1");
+                        $('#opcionesAlSubirExcel').show();
+                        Aatrox.setAttribute("src", "/Content/Images/tick.png");
+
+                        LeerColumnasExcel();
+                        ExportToTable();
+                        btnUpExcel.disabled = true;
+                        btnFileUpExcel.disabled = true;
+                        btnCancelarExcel.disabled = false;
+
+                    } else {
+                        alertify.error(result.message);
+                    }
+
+                }
+            });
+        } else {
+            alertify.error("FormData is not supported.");
+        }
+    }
+
+    function cancelarExcel() {
+
+        var btnUpExcel = document.getElementById('btnUploadExcel');
+        var fileExcel = document.getElementById('xlsxFile');
+
+        btnUpExcel.disabled = false;
+        fileExcel.disabled = false;
+
+        fileExcel.value = "";
+
+        Aatrox.setAttribute("src", "/Content/Images/close.png");
+    }
+
+    function LeerColumnasExcel() {
+
+        var sel = document.getElementById("dropdownCols");
+        for (let i = sel.options.length; i >= 0; i--) {
+            sel.remove(i);
+        }
+
+        var sel1 = document.getElementById("dropdownCols1");
+        for (let i = sel1.options.length; i >= 0; i--) {
+            sel1.remove(i);
+        }
+
+        var excelCorreos = $('#xlsxFile').val();
+
+         $.ajax({
+             url: '@Url.Action("LeerExcel", "Home")',
+
+             type: 'POST',
+             data: JSON.stringify(
+             {
+                 xlsxFile: excelCorreos
+             }),
+             contentType: 'application/json; charset=utf-8',
+             dataType: "json",
+             success: function (msg) {
+
+                 $(msg).each(function () {
+                     var option = $(document.createElement('option'));
+                     option.text(this);
+                     option.val(this);
+                     $('select[name="dropdownCols"]').append(option);
+
+
+                 });
+             },
+             error: function (msg) {
+                 alertify.error(msg.message);
+             }
+         });
+    }
+
+    function subirPlantilla() {
+
+        var plantilla = $('#emailHtmlTemplate').val().toString();
+        var btnUpPlan = document.getElementById('btnUploadPlantilla');
+        var ddlPlan = document.getElementById('emailHtmlTemplate');
+        var btnCancelarPlantilla = document.getElementById('btnCancelPlantilla');
+
+
+            $.ajax({
+                url: '@Url.Action("UploadFiles2", "Home")',
+                type: 'POST',
+                data: JSON.stringify(
+                {
+                    nameFile:plantilla
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (result) {
+
+                    if (result.success) {
+                        $('#indicadorPlantilla').val("1");
+                        Aatrox1.setAttribute("src", "/Content/Images/tick.png");
+                        btnUpPlan.disabled = true;
+                        ddlPlan.disabled = true;
+                        btnCancelarPlantilla.disabled = false;
+
+                    } else {
+                        alertify.error(result.message);
+                    }
+                }
+            });
+
+    }
+
+
+    function cancelarPlantilla() {
+
+        var btnUpPlantilla = document.getElementById('btnUploadPlantilla');
+        var ddlPlan = document.getElementById('emailHtmlTemplate');
+
+        btnUpPlantilla.disabled = false;
+        ddlPlan.disabled = false;
+
+
+        Aatrox1.setAttribute("src", "/Content/Images/close.png");
+
+    }
+
+
+    function subirAdjunto() {
+
+        var btnUpAdj = document.getElementById('btnUploadAdjunto');
+        var btnFileUpAdj = document.getElementById('adjunto');
+        var btnCancelarAdjunto = document.getElementById('btnCancelAdjunto');
+
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#adjunto").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+            $.ajax({
+                url: '@Url.Action("UploadFiles3", "Home")',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+
+                    if (result.success) {
+                        Aatrox2.setAttribute("src", "/Content/Images/tick.png");
+                        btnUpAdj.disabled = true;
+                        btnFileUpAdj.disabled = true;
+                        btnCancelarAdjunto.disabled = false;
+                    } else {
+                        alertify.error(result.message);
+                    }
+                }
+            });
+        }
+        else {
+            alert("FormData is not supported.");
+        }
+
+    }
+
+    function cancelarAdjunto() {
+
+        var btnUpAdj = document.getElementById('btnUploadAdjunto');
+        var btnFileUpAdj = document.getElementById('adjunto');
+
+        btnUpAdj.disabled = false;
+        btnFileUpAdj.disabled = false;
+
+        btnFileUpAdj.value = "";
+
+        Aatrox2.setAttribute("src", "/Content/Images/close.png");
+    }
+
+    function subirImagen() {
+
+        var btnUpImg = document.getElementById('btnUploadImagen');
+        var btnFileUpImg = document.getElementById('imagenFile');
+        var btnCancelarImg = document.getElementById('btnCancelImagen');
+
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#imagenFile").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+            $.ajax({
+                url: '@Url.Action("UploadFiles4", "Home")',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+
+                    if (result.success) {
+                        alertify.success(result.message);
+                        btnUpImg.disabled = true;
+                        btnFileUpImg.disabled = true;
+                        btnCancelarImg.disabled = false;
+
+                    } else {
+                        alertify.error(result.message);
+                    }
+                }
+            });
+        }
+        else {
+            alertify.error("FormData is not supported.");
+        }
+
+    }
+
+    function cancelarImagen() {
+
+        var btnUpImg = document.getElementById('btnUploadImagen');
+        var btnFileUpImg = document.getElementById('imagenFile');
+
+        btnUpImg.disabled = false;
+        btnFileUpImg.disabled = false;
+
+        btnFileUpImg.value = "";
+
+    }
+
+    function mostrarDestinatarios()
+    {
+        $('#btnMostrarDestinatarios').hide();
+        $('#divComprobacionDestinatarios').show();
+        $('#btnOcultarDestinatarios').show();
+    }
+    function ocultarDestinatarios() {
+        $('#btnMostrarDestinatarios').show();
+        $('#btnOcultarDestinatarios').hide();
+        $('#divComprobacionDestinatarios').hide();
+    }
+
+    function crearTag() {
+
+        tag = document.getElementById('txtNombreTag').value;
+
+        var restults = $("#dropdownTags option").map(function () {
+            return this.value;
+        }).get();
+        var postData = { values: restults,'tag':tag };
+
+        if (tag == "") {
+            alertify.warning('No puede dejar vacio este campo');
+
+            $('#divAsignacionTag').hide();
+            document.getElementById("txtNombreTag").focus();
+        }
+        else {
+            $.ajax({
+            type: 'POST',
+            url: '@Url.Action("guardarTag", "Home")',
+            data: postData,
+            dataType: "json",
+            traditional: true,
+                success: function (msg) {
+
+                        document.getElementById('txtNombreTag').value = "";
+                        console.log(msg.data);
+                        if (msg.data != null) {
+                            $(msg).each(function () {
+                                var option = $(document.createElement('option'));
+                                option.text(this.data);
+                                option.val(this.data);
+
+                                $('select[name="dropdownTags"]').append(option);
+                                $('#btnPaso1').show();
+                                alertify.success("Tag " + tag + " creado exitosamente");
+                                document.getElementById("txtNombreTag").focus();
+
+                            });
+                        } else {
+                            alertify.warning('Tag Repetido');
+                            document.getElementById("txtNombreTag").focus();
+                        }
+                },
+                error: function (response) {
+                    alertify.error(response.message);
+                }
+
+            });
+        }
+
+
+    }
+
+    function siguientePaso2() {
+        $('#divAgregarTag').hide();
+        $('#divAsignacionTag').show();
+    }
+    function siguientePaso3() {
+        $('#btnPaso2').hide();
+        $('#divAsignacionTag').hide();
+        $('#divConfirmacionTagsCol').hide();
+        $('#divNombreTituloPlantilla').show();
+        $('#btnPaso3').show();
+    }
+    function siguientePaso4() {
+
+        nomPlan = document.getElementById('txtNombrePlantilla').value;
+        titPlan = document.getElementById('txtTituloPlantilla').value;
+
+        if ((nomPlan == "") || (titPlan == ""))
+        {
+            alertify.warning("Por favor ingrese el nombre y titulo de la plantilla");
+            return
+        }
+        else
+        {
+            $('#btnPaso3').hide();
+            $('#divNombreTituloPlantilla').hide();
+            $('#divContenidoPlantilla').show();
+            $('#btnPaso4').show();
+        }
+
+    }
+    function siguientePaso5() {
+
+        cont = document.getElementById('txtContenido').value;
+
+        if (cont == "") {
+            alertify.warning("Por favor ingrese el contenido del correo");
+            return
+        }
+        else {
+            $('#btnPaso4').hide();
+            $('#divContenidoPlantilla').hide();
+            $('#divOpcionalesFirmaPlantilla').show();
+            $('#divBtnCrearPlantilla').show();
+        }
+
+    }
+
+    function asignarTagCol() {
+        /* Para obtener el valor del tag */
+        var nomTag = document.getElementById("dropdownTags").value;
+
+        /* Para obtener el valor de la columna */
+        var nomCol = document.getElementById("dropdownCols").value;
+
+       $.ajax({
+                type: 'GET',
+                url: '@Url.Action("AsignarTagColumna", "Home")',
+           data: {
+               'tag': nomTag,
+               'col': nomCol
+           },
+                dataType: "json",
+           success: function (msg) {
+               console.log(msg);
+               $(msg).each(function () {
+                   var option = $(document.createElement('option'));
+
+                   option.text(this.data);
+                   option.val(this.data);
+                   $('select[name="dropdownColTags"]').append(option);
+               });
+               alertify.success("El Tag " + nomTag + " ha sido asignado a la columna " + nomCol);
+               $('#divConfirmacionTagsCol').show();
+           },
+           error: function (response) {
+               alertify.error(response.message);
+           }
+
+       });
+
+    }
+
+    function confirmarAsignaciones() {
+
+        var btnAsigtag = document.getElementById('btnAsignaTag');
+
+        var restults = $("#dropdownColTags option").map(function () {
+            return this.value;
+        }).get();
+        console.log(restults)
+
+        var postData = { values: restults };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ConfirmarAsignaciones", "Home")',
+            data: postData,
+            dataType: "json",
+            traditional: true,
+            success: function (msg) {
+                console.log(msg.data);
+
+                for (value in msg.data) {
+                    var option = document.createElement("option");
+                    option.text = msg.data[value];
+                    $('select[name="dropdownTagsContenido"]').append(option);
+                }
+
+                alertify.success("Asignaciones confirmadas");
+                btnAsigtag.disabled = true;
+                $('#btnConfirmarAsignaciones').hide();
+                $('#btnPaso2').show();
+
+            },
+            error: function (response) {
+                alertify.error(response.message);
+            }
+
+        });
+
+    }
+
+    function colocarTag() {
+
+        /* Para obtener el valor del tag */
+        var nomTag = document.getElementById("dropdownTagsContenido").value;
+        var text = "";
+        text = text + document.getElementById("txtContenido").value + nomTag;
+
+
+        $("#txtContenido").val(text);
+        document.getElementById("txtContenido").focus();
+    }
+
+    function CrearPlantilla() {
+        var sel = document.getElementById("emailHtmlTemplate");
+        linkSitio = document.getElementById('txtLinkSitio').value;
+        firma = document.getElementById('txtFirma').value;
+
+        var restults = $("#dropdownColTags option").map(function () {
+            return this.value;
+        }).get();
+
+        var postData = {
+            values: restults, 'nombrePlantilla': nomPlan, 'tituloPlantilla': titPlan, 'linkSitio': linkSitio, 'contenido': cont, 'firma': firma
+        };
+
+        for (let i = sel.options.length; i >= 0; i--) {
+            sel.remove(i);
+        }
+
+        if (firma == "")
+        {
+            alertify.warning("Por favor ingrese la firma del Emisor");
+            return
+        }
+        else
+        {
+             $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GrabarPlantillaPersonalizada", "Home")',
+                data: postData,
+                 dataType: "json",
+                 traditional: true,
+                 success: function (msg) {
+
+                         $(msg).each(function () {
+                         var option = $(document.createElement('option'));
+
+                         option.text(this);
+                         option.val(this);
+                         console.log(msg);
+                         $('select[name="emailHtmlTemplate"]').append(option);
+                         });
+
+                     $('#barra1').modal('hide');
+
+                     alertify.success("Plantilla creada exitosamente");
+
+                 },
+                 error: function (response) {
+                     alertify.error(response.message);
+                 }
+            });
+        }
+    }
+
+
+    function cambioColDestinatios() {
+        Aatrox3.setAttribute("src", "/Content/Images/tick.png");
+    }
+
+</script>
+
